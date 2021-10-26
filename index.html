@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flightpool</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        .fade-enter-active {
+            transition: .8s ;
+
+        }
+        .fade-enter {
+            opacity: 0;
+            /*filter: blur(5px);*/
+        }
+        .pop-enter-active {
+            transition: .8s ;
+
+        }
+        .pop-enter {
+            opacity: 0;
+            transform: translateY(100%);
+            /*filter: blur(5px);*/
+        }
+    </style>
+</head>
+<body>
+
+        <div id="app">
+            <nav class="navbar bg-d px-3 py-2 ms-0 d-flex align-items-center">
+                <div class="container">
+                    <a href="#" class="navbar-brand" @click="page = 'index'">
+
+                        <img src="./assets/img/airplane.png" alt="logo">
+
+
+                    </a>
+                    <div class="navbar-menu ms-auto d-flex justify-content-end align-items-center">
+                        <a href="#" class="navbar-link mx-3">Акции</a>
+                        <a href="#" class="navbar-link mx-3">Поиск</a>
+                        <a href="#" class="navbar-link mx-3">Регистрация на рейс</a>
+                        <a href="#" class="navbar-link mx-3 me-0 btn b-radius px-2 " @click="page = 'register'">Личный кабинет</a>
+                    </div>
+                </div>
+            </nav>
+
+
+            <div class="pops fixed-bottom ">
+                    <transition-group name="pop" tag="ul">
+                        <li v-for="(item,index) in pops" class="list-group me-4 mb-2"  :key="index">
+                            <a class="nav-link b-radius bg-d ms-auto text-white d-flex align-items-center">
+                                {{item}}
+                            </a>
+                        </li>
+                    </transition-group>
+
+                </div>
+
+
+            <transition name="fade">
+                <div v-if="page == 'index'">
+
+
+                    <header class="header text-white">
+                        <div class="container pt-5">
+                            <div class="row">
+                                <div class="col-12  text-left mt-5 pt-5">
+                                    <h1 class="header-title">ВЫБИРАЙ ЛУЧШЕЕ И <br> ЛЕТАЙ ВМЕСТЕ <br> С FLIGHTPOOL</h1>
+                                    <h5 class="header-subtitle">Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit</h5>
+                                    <a href="#search" class=" btn header-btn mt-4">Поиск авиабилетов</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+
+                    <main>
+                        <div class="principals">
+                            <div class="container">
+                                <div class=" b-radius d-flex justify-content-center align-items-center flex-wrap overflow-hidden principals-wrapper ">
+                                    <div class="col-12 col-md-4 item bg-second p-2">
+                                        <div class="item-bg"><img src="./assets/img/gary-lopater-dOOGrK3zcUc-unsplash.jpg" alt=""></div>
+                                        <div class="item-text p-3">
+                                            <div class="item-icon">
+                                                ✈
+                                            </div>
+                                            <div class="item-title">Удобная дата перелета</div>
+                                            <div class="item-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4 item bg-second p-2">
+                                        <div class="item-bg"><img src="./assets/img/amarnath-tade-gXs-mwiXrhA-unsplash.jpg" alt=""></div>
+                                        <div class="item-text p-3">
+                                            <div class="item-icon">
+                                                ✔
+                                            </div>
+                                            <div class="item-title">Бронирование на рейс</div>
+                                            <div class="item-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4 item bg-second p-2">
+                                        <div class="item-bg"><img src="./assets/img/danist-soh-58MKf-UXjaA-unsplash.jpg" alt=""></div>
+                                        <div class="item-text p-3">
+                                            <div class="item-icon">
+                                                💸
+                                            </div>
+                                            <div class="item-title">Снижение цены</div>
+                                            <div class="item-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="about">
+                            <div class="container">
+                                <div class="title my-5 ">О КОМПАНИИ</div>
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="item">
+                                                    <div class="item-icon">👍</div>
+                                                    <div class="item-title">Компании более 6 лет</div>
+                                                    <div class="item-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora laboriosam nam incidunt </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="item">
+                                                    <div class="item-icon">💰</div>
+                                                    <div class="item-title">Низкие цены</div>
+                                                    <div class="item-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora laboriosam nam incidunt </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="item">
+                                                    <div class="item-icon">🌍</div>
+                                                    <div class="item-title">Много клиентов</div>
+                                                    <div class="item-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora laboriosam nam incidunt </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="item">
+                                                    <div class="item-icon">🤵</div>
+                                                    <div class="item-title">Нам доверяют</div>
+                                                    <div class="item-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora laboriosam nam incidunt </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" offset-md-1 col-md-5 d-flex justify-content-center align-items-center">
+                                        <div class="about-card b-radius col-12 col-md-10">
+                                            <div class="card-title">
+                                                Нaчните поиск <br> прямо сейчас
+                                            </div>
+                                            <div class="btn">ПОИСК</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="search mt-5">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="search-container w-100 px-4 py-4 b-radius " id="search">
+                                            <div class="search-title title text-white" onclick="document.getElementById('search').classList.toggle('active')">
+                                                Поиск <span>&RightArrow;</span>
+                                            </div>
+                                            <div class="search-form">
+                                                <form action="#">
+                                                    <div class="row align-items-center justify-content-center ">
+                                                        <div class="col-md-2">
+                                                            <input type="text" v-model="searchForm.from" class="form-control search-input" placeholder="Откуда">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" v-model="searchForm.to" class="form-control search-input" placeholder="Куда">
+
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" v-model="searchForm.departing" class="form-control search-input" placeholder="Туда">
+
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" v-model="searchForm.returning" class="form-control search-input" placeholder="Обратно">
+
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <select class="form-control search-input" v-model="searchForm.passengers">
+                                                                <option value="0">Количество пассажиров</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2 ">
+                                                            <a href="#" class=" search-input btn w-100" @click="search()">Поиск</a>
+
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="promo mt-5">
+                            <div class="container">
+                                <div class="title text-center">АКЦИИ</div>
+                                <div class="row align-items-center mt-5">
+                                    <div class=" col-12 col-md-3 ">
+                                        <div class="item b-radius">
+                                            <img src="./assets/img/jens-kreuter-IBb0U6k0PAY-unsplash.jpg" class="item-bg" alt="">
+                                            <div class="item-text">
+                                                <div class="item-title ">
+                                                    Название акции
+                                                </div>
+                                                <div class="item-subtitle mt-1">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
+                                                </div>
+                                                <a href="#" class="btn mt-1">Посмотреть</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-12 col-md-3 ">
+                                        <div class="item b-radius">
+                                            <img src="./assets/img/philip-myrtorp-iiqpxCg2GD4-unsplash.jpg" class="item-bg" alt="">
+                                            <div class="item-text">
+                                                <div class="item-title ">
+                                                    Название акции
+                                                </div>
+                                                <div class="item-subtitle mt-1">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
+                                                </div>
+                                                <a href="#" class="btn mt-1">Посмотреть</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-12 col-md-3 ">
+                                        <div class="item b-radius">
+                                            <img src="./assets/img/tamas-pap-ITmbA3LVCfs-unsplash.jpg" class="item-bg" alt="">
+                                            <div class="item-text">
+                                                <div class="item-title ">
+                                                    Название акции
+                                                </div>
+                                                <div class="item-subtitle mt-1">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
+                                                </div>
+                                                <a href="#" class="btn mt-1">Посмотреть</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-12 col-md-3 ">
+                                        <div class="item b-radius">
+                                            <img src="./assets/img/gary-lopater-dOOGrK3zcUc-unsplash.jpg" class="item-bg" alt="">
+                                            <div class="item-text">
+                                                <div class="item-title ">
+                                                    Название акции
+                                                </div>
+                                                <div class="item-subtitle mt-1">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
+                                                </div>
+                                                <a href="#" class="btn mt-1">Посмотреть</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subscribe mt-5 py-5 pb-3">
+                            <div class="container">
+                                <div class="title text-white">
+                                    Получайте закрытые акции <br>
+                                    и оставайтесь с нами
+                                </div>
+                                <div class="subscribe-form">
+                                    <div class="col-md-3 mt-4 subscribe-input">
+                                        <input type="text" class="form-control search-input " placeholder="Ваш E-mail">
+                                        <a href="#" class="subscribe-arrow text-white">&RightArrow;</a>
+                                    </div>
+                                </div>
+                                <hr class="footer-divider mt-5">
+                                <footer class="footer py-1">
+                                    <div class="container">
+                                        <nav class="navbar  ms-0 d-flex align-items-center">
+                                            <div class="container">
+                                                <a href="index.html" class="navbar-brand">
+
+                                                    <img src="./assets/img/airplane.png" alt="logo">
+
+
+                                                </a>
+                                                <div  class="navbar-menu ms-auto d-flex justify-content-end align-items-center flex-wrap">
+                                                    <a href="index.html#promo" class="navbar-link mx-3">Акции</a>
+                                                    <a href="index.html#search" class="navbar-link mx-3">Поиск</a>
+                                                    <a href="#" class="navbar-link mx-3">О компании</a>
+                                                    <a href="#" class="navbar-link mx-3">Подписка на акции</a>
+                                                    <a href="tel:+78001001010" class="navbar-link mx-3 me-0 btn b-radius px-2 ">8 (800) 100-10-10</a>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div v-if="page == 'search'">
+
+
+                    <main class="booking py-5">
+                        <div class="container">
+
+                            <div class="booking-wrapper">
+                                <div class="title">Результаты поиска
+                                </div>
+                                <hr>
+                                <div class="booking-content pt-1">
+                                    <div class="d-flex justify-content-start align-items-center flex-wrap">
+                                        <a  class="btn ms-1 d-flex justify-content-start align-items-center" @click.prevent="filterSearch('date')">По времени
+                                        <input type="text"  class="form-control search-input ms-2"  v-model="filters.startDate" placeholder="00:00" value="00:00">
+                                        <input type="text"  class="form-control search-input ms-2"  v-model="filters.endDate" placeholder="23:59" value="23:59"></a>
+                                        <a  class="btn ms-1" @click.prevent="sortSearch('fast')">Самый быстрый</a>
+                                        <a  class="btn ms-1" @click.prevent="sortSearch('cheap')">Самый дешевый</a>
+                                    </div>
+
+                                    <div v-for="(item, index) in flightsFilter.flights_to"  class="flight mt-3" :class="{'active' : item.selected}" @click.prevent="selectFlight(item, 'to')" >
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 {{item.flight_code}}
+                                                        <span>Номер рейса </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ {{item.flight_id}}
+                                                        <span>Воздушное судно </span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        {{item.form.date}}
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{item.form.time}} {{item.form.city}}
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        {{item.to.time}} {{item.to.city}}
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getHours() - new Date('2020-07-07T'+item.form.time).getHours())}} ч
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getMinutes() - new Date('2020-07-07T'+item.form.time).getMinutes())}} м
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        {{item.cost * searchForm.passengers}} руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        {{Math.floor((Math.random() * 100))}}%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div v-for="(item, index) in flightsFilter.flights_back" class="flight" :class="{'active' : item.selected}" @click.prevent="selectFlight(item, 'back')">
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 {{item.flight_code}}
+                                                        <span>Номер рейса </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ {{item.flight_id}}
+                                                        <span>Воздушное судно </span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        {{item.form.date}}
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{item.form.time}} {{item.form.city}}
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        {{item.to.time}} {{item.to.city}}
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getHours() - new Date('2020-07-07T'+item.form.time).getHours())}} ч
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getMinutes() - new Date('2020-07-07T'+item.form.time).getMinutes())}} м
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        {{item.cost * searchForm.passengers}} руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        {{Math.floor((Math.random() * 100))}}%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="booking-buttons mt-4">
+                                    <a @click.prevent="toBooking()" class="btn">Перейти к бронрованию</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div v-if="page == 'booking'">
+
+
+                    <main class="booking py-5">
+                        <div class="container">
+
+                            <div class="booking-wrapper">
+                                <div class="title">Бронирование</div>
+                                <hr>
+                                <div class="booking-content pt-3">
+                                    <div v-for="(item, index) in flightsSelected.flights_to"  class="flight mt-3" :class="{'active' : item.selected}" @click.prevent="selectFlight(item, 'to')" >
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 {{item.flight_code}}
+                                                        <span>Номер рейса </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ {{item.flight_id}}
+                                                        <span>Воздушное судно </span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        {{item.form.date}}
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{item.form.time}} {{item.form.city}} ({{item.form.iata}})
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        {{item.to.time}} {{item.to.city}} ({{item.to.iata}})
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getHours() - new Date('2020-07-07T'+item.form.time).getHours())}} ч
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getMinutes() - new Date('2020-07-07T'+item.form.time).getMinutes())}} м
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        {{item.cost * searchForm.passengers}} руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        {{Math.floor((Math.random() * 100))}}%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div v-for="(item, index) in flightsSelected.flights_back"  class="flight mt-3" :class="{'active' : item.selected}" @click.prevent="selectFlight(item, 'to')" >
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 {{item.flight_code}}
+                                                        <span>Номер рейса </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ {{item.flight_id}}
+                                                        <span>Воздушное судно </span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        {{item.form.date}}
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{item.form.time}} {{item.form.city}} ({{item.form.iata}})
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        {{item.to.time}} {{item.to.city}} ({{item.to.iata}})
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getHours() - new Date('2020-07-07T'+item.form.time).getHours())}} ч
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getMinutes() - new Date('2020-07-07T'+item.form.time).getMinutes())}} м
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        {{item.cost * searchForm.passengers}} руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        {{Math.floor((Math.random() * 100))}}%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="booking-wrapper">
+                                <div class="title">Данные о пассажирах</div>
+                                <hr>
+                                <div class="booking-content pt-4">
+                                    <transition-group name="pop">
+                                        <div v-for="(passenger,index) in booking.passengers" :key="index" class="flight  flight-top passanger" >
+                                            <div class="cross" v-if="booking.passengers.length > 1" @click.prevent="delPassenger(index)">X</div>
+                                            <div class="row">
+                                                <div class="col-md-3 ">
+                                                    <div class="flight-info flight-dash flight-column">
+                                                        <p class="flight-number tip">
+                                                            🙍‍♂️ Имя пассажира
+                                                        </p>
+                                                        <p class="flight-plane tip">
+                                                            <input type="text" v-model="booking.passengers[index].first_name" class=" form-control search-input" placeholder="Иван">
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <div class="flight-out flight-dash flight-column">
+                                                        <p class="flight-number tip">
+                                                            🙍‍♂️ Фамилия пассажира
+                                                        </p>
+                                                        <p class="flight-plane tip">
+                                                            <input type="text" v-model="booking.passengers[index].last_name" class=" form-control search-input" placeholder="Иванов">
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <div class="flight-in flight-dash flight-column">
+                                                        <p class="flight-number tip">
+                                                            📅 Дата рождения
+                                                        </p>
+                                                        <p class="flight-plane tip">
+                                                            <input type="text" v-model="booking.passengers[index].birth_date" class=" form-control search-input" >
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <div class="flight-all flight-dash flight-column">
+                                                        <p class="flight-number tip">
+                                                            📄 Номер документа
+                                                        </p>
+                                                        <p class="flight-plane tip">
+                                                            <input type="text" v-model="booking.passengers[index].document_number" class=" form-control search-input"  >
+                                                        </p>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </transition-group>
+
+
+
+
+
+                                </div>
+                                <div class="booking-buttons mt-4">
+                                    <a @click.prevent="addPassenger()" class="btn">Добавить пассажира +</a>
+                                </div>
+                            </div>
+                            <div class="booking-wrapper">
+                                <div class="title">Финальная стоимость</div>
+                                <hr>
+                                <div class="booking-content pt-2">
+                                    <div class="title">13000 руб</div>
+
+
+
+
+
+                                </div>
+                                <div class="booking-buttons mt-4">
+                                    <a @click.prevent="toBookingManagement()" class="btn">Оформление бронирования</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div v-if="page == 'booking_management'">
+
+
+                    <main class="booking py-5">
+                        <div class="container">
+                            <div class="booking-wrapper">
+                                <div class="title">
+                                    Управление бронированием
+                                    <p class="tip">
+                                        {{bookingInfo.code}} - {{bookingInfo.cost}} руб
+                                        <span>Код бронирования - стоимость</span>
+                                    </p>
+                                </div>
+                                <hr />
+                                <div class="booking-content pt-4">
+                                    <div v-for="(item, index) in bookingInfo.flights"  class="flight mt-3" :class="{'active' : item.selected}" @click.prevent="selectFlight(item, 'to')" >
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 {{item.flight_code}}
+                                                        <span>Номер рейса </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ {{item.flight_id}}
+                                                        <span>Воздушное судно </span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        {{item.form.date}}
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{item.form.time}} {{item.form.city}} ({{item.form.iata}})
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        {{item.to.time}} {{item.to.city}} ({{item.to.iata}})
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getHours() - new Date('2020-07-07T'+item.form.time).getHours())}} ч
+                                                        {{Math.abs(new Date('2020-07-07T'+item.to.time).getMinutes() - new Date('2020-07-07T'+item.form.time).getMinutes())}} м
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        {{item.cost * searchForm.passengers}} руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        {{Math.floor((Math.random() * 100))}}%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="booking-wrapper">
+                                <div class="title">Данные о пассажирах</div>
+                                <hr />
+                                <div class="booking-content pt-4">
+                                    <div v-for="(passenger,index) in bookingInfo.passengers" :key="index" class="flight  flight-top passanger" >
+
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🙍‍♂️ Имя пассажира
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        <input type="text" v-model="passenger.first_name" class=" form-control search-input" placeholder="Иван">
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🙍‍♂️ Фамилия пассажира
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        <input type="text" v-model="passenger.last_name" class=" form-control search-input" placeholder="Иванов">
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        📅 Место туда
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        <input type="text" v-model="passenger.place_from" class=" form-control search-input" >
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        📄 Место обратно
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        <input type="text" v-model="passenger.place_back" class=" form-control search-input"  >
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div v-if="page == 'register' || page == 'login' ">
+
+
+                    <main class="booking py-5">
+                        <div class="container position-relative">
+
+
+
+                            <div class="booking-wrapper col-12 col-md-4 mx-auto register-card " :class="{'active' : this.page == 'register'}" id="reg">
+                                <div class="title text-center">Регистрация </div>
+                                <hr>
+                                <div class="booking-content pt-2">
+                                    <form action="#">
+                                        <input type="text" class="form-control search-input " placeholder="🤵 Имя">
+                                        <input type="text" class="form-control search-input" placeholder="🤵 Фамилия">
+                                        <input type="text" class="form-control search-input" placeholder="📄 Номер документа">
+                                        <input type="text" class="form-control search-input" placeholder="📱 Телефон">
+                                        <input type="text" class="form-control search-input" placeholder="🔑 Пароль">
+                                        <input type="text" class="form-control search-input" placeholder="🔑 Повтор пароля">
+
+                                        <a  class="btn ms-auto d-block mt-3" @click="page = 'login'">Регистрация</a>
+                                        <a  class="btn ms-auto d-block mt-2 outline-none" @click="page = 'login'">Вход</a>
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+                            <div class="booking-wrapper col-12 col-md-4 mx-auto register-card" :class="{'active' : this.page == 'login'}" id="login">
+                                <div class="title text-center">Вход </div>
+                                <hr>
+                                <div class="booking-content pt-2">
+                                    <form action="#">
+                                        <input type="text" class="form-control search-input" placeholder="📱 Телефон">
+                                        <input type="text" class="form-control search-input" placeholder="🔑 Пароль">
+
+                                        <a  class="btn ms-auto d-block mt-3" @click="signIn()">Вход</a>
+                                        <a  class="btn ms-auto d-block mt-2 outline-none" @click="page = 'register'">Регистрация</a>
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div  v-if="page == 'profile' && user !== '' ">
+
+
+                    <main class="booking py-5">
+                        <div class="container">
+
+                            <div class="booking-wrapper">
+                                <div class="title">Личный кабинет </div>
+                                <hr>
+                                <div class="booking-content pt-4">
+                                    <div class="flight  flight-top no-dash" >
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🙍‍♂️ Имя
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        Иван
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🙍‍♂️ Фамилия
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        Иванов
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="flight-in flight-dash flight-column ">
+                                                    <p class="flight-number tip">
+                                                        ✈ Количество полетов
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        15
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="booking-buttons mt-4">
+                                    <a href="index.html" class="btn red-outline">Выход из личного кабинета</a>
+                                </div>
+                            </div>
+                            <div class="booking-wrapper">
+                                <div class="title">Предстоящие бронирования</div>
+                                <hr>
+                                <div class="booking-content pt-4">
+                                    <div class="flight active flight-top" onclick="">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="flight-info flight-dash flight-column">
+                                                    <p class="flight-number tip">
+                                                        🔢 Q8716AS
+                                                        <span>Код бронирования </span>
+                                                    </p>
+                                                    <p class="flight-plane tip">
+                                                        ✈ BOEING777
+                                                        <span>Город вылета </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="flight-out flight-dash flight-column">
+                                                    <p class="flight-date tip">
+                                                        17/07
+                                                        <span>Дата вылета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        10:30 Сургут (SUR)
+                                                        <span>Время вылета</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="flight-in flight-dash flight-column">
+                                                    <p class="flight-time tip">
+                                                        16:30 Москва (SHE)
+                                                        <span>Время прилета</span>
+                                                    </p>
+                                                    <p class="flight-time tip">
+                                                        2 ч 10 мин
+                                                        <span>Время в пути</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="flight-all flight-dash flight-column">
+                                                    <p class="flight-cost tip">
+                                                        4842 руб
+                                                        <span>Стоимость</span>
+                                                    </p>
+                                                    <p class="flight-cost tip">
+                                                        50%
+                                                        <span>Вероятность вылета</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
+
+
+
+        </div>
+
+
+        <script src="./assets/js/vue.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/main.js"></script>
+</body>
+</html>
