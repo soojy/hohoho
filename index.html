@@ -61,7 +61,7 @@
 
 
             <transition name="fade">
-                <div v-if="page == 'index'">
+                <div v-if="page === 'index'">
 
 
                     <header class="header text-white">
@@ -327,7 +327,7 @@
             </transition>
 
             <transition name="fade">
-                <div v-if="page == 'search'">
+                <div v-if="page === 'search'">
 
 
                     <main class="booking py-5">
@@ -478,7 +478,7 @@
             </transition>
 
             <transition name="fade">
-                <div v-if="page == 'booking'">
+                <div v-if="page === 'booking'">
 
 
                     <main class="booking py-5">
@@ -702,9 +702,7 @@
             </transition>
 
             <transition name="fade">
-                <div v-if="page == 'booking_management'">
-
-
+                <div v-if="page === 'booking_management'">
                     <main class="booking py-5">
                         <div class="container">
                             <div class="booking-wrapper">
@@ -783,53 +781,44 @@
                                 <div class="title">Данные о пассажирах</div>
                                 <hr />
                                 <div class="booking-content pt-4">
-                                    <div v-for="(passenger,index) in bookingInfo.passengers" :key="index" class="flight  flight-top passanger" >
+                                    <div v-for="(item,index) in bookingInfo.passengers" :key="index" class="flight  flight-top passanger" >
 
                                         <div class="row">
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3">
                                                 <div class="flight-info flight-dash flight-column">
                                                     <p class="flight-number tip">
                                                         🙍‍♂️ Имя пассажира
                                                     </p>
                                                     <p class="flight-plane tip">
-                                                        <input type="text" v-model="passenger.first_name" class=" form-control search-input" placeholder="Иван">
+                                                        {{item.first_name}}
                                                     </p>
                                                 </div>
-
                                             </div>
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3">
                                                 <div class="flight-out flight-dash flight-column">
                                                     <p class="flight-number tip">
                                                         🙍‍♂️ Фамилия пассажира
                                                     </p>
                                                     <p class="flight-plane tip">
-                                                        <input type="text" v-model="passenger.last_name" class=" form-control search-input" placeholder="Иванов">
+                                                        {{item.last_name}}
                                                     </p>
                                                 </div>
-
                                             </div>
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3">
                                                 <div class="flight-in flight-dash flight-column">
                                                     <p class="flight-number tip">
-                                                        📅 Место туда
+                                                        💺 Место туда
                                                     </p>
-                                                    <p class="flight-plane tip">
-                                                        <input type="text" v-model="passenger.place_from" class=" form-control search-input" >
-                                                    </p>
+                                                    <p class="flight-plane tip seat">{{item.place_from}} <a @click.prevent="toSeat(item.id,'from')" class="btn ms-3">Выбор места</a></p>
                                                 </div>
-
                                             </div>
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3">
                                                 <div class="flight-all flight-dash flight-column">
                                                     <p class="flight-number tip">
-                                                        📄 Место обратно
+                                                        💺 Место обратно
                                                     </p>
-                                                    <p class="flight-plane tip">
-                                                        <input type="text" v-model="passenger.place_back" class=" form-control search-input"  >
-                                                    </p>
+                                                    <p class="flight-plane tip seat">{{item.place_back}} <a @click.prevent="toSeat(item.id,'back')" class="btn ms-3">Выбор места</a></p>
                                                 </div>
-
-
                                             </div>
                                         </div>
 
@@ -842,7 +831,7 @@
             </transition>
 
             <transition name="fade">
-                <div v-if="page == 'register' || page == 'login' ">
+                <div v-if="page === 'register' || page === 'login' ">
 
 
                     <main class="booking py-5">
@@ -850,19 +839,19 @@
 
 
 
-                            <div class="booking-wrapper col-12 col-md-4 mx-auto register-card " :class="{'active' : this.page == 'register'}" id="reg">
+                            <div class="booking-wrapper col-12 col-md-4 mx-auto register-card " :class="{'active' : this.page === 'register'}" id="reg">
                                 <div class="title text-center">Регистрация </div>
                                 <hr>
                                 <div class="booking-content pt-2">
                                     <form action="#">
-                                        <input type="text" class="form-control search-input " placeholder="🤵 Имя">
-                                        <input type="text" class="form-control search-input" placeholder="🤵 Фамилия">
-                                        <input type="text" class="form-control search-input" placeholder="📄 Номер документа">
-                                        <input type="text" class="form-control search-input" placeholder="📱 Телефон">
-                                        <input type="text" class="form-control search-input" placeholder="🔑 Пароль">
-                                        <input type="text" class="form-control search-input" placeholder="🔑 Повтор пароля">
+                                        <input type="text" class="form-control search-input " v-model="signUpFrom.first_name" placeholder="🤵 Имя">
+                                        <input type="text" class="form-control search-input" v-model="signUpFrom.last_name" placeholder="🤵 Фамилия">
+                                        <input type="text" class="form-control search-input" v-model="signUpFrom.document_number" placeholder="📄 Номер документа">
+                                        <input type="text" class="form-control search-input" v-model="signUpFrom.phone" placeholder="📱 Телефон">
+                                        <input type="text" class="form-control search-input" v-model="signUpFrom.password" placeholder="🔑 Пароль">
 
-                                        <a  class="btn ms-auto d-block mt-3" @click="page = 'login'">Регистрация</a>
+
+                                        <a  class="btn ms-auto d-block mt-3" @click="signUp()">Регистрация</a>
                                         <a  class="btn ms-auto d-block mt-2 outline-none" @click="page = 'login'">Вход</a>
                                     </form>
 
@@ -875,8 +864,8 @@
                                 <hr>
                                 <div class="booking-content pt-2">
                                     <form action="#">
-                                        <input type="text" class="form-control search-input" placeholder="📱 Телефон">
-                                        <input type="text" class="form-control search-input" placeholder="🔑 Пароль">
+                                        <input type="text" class="form-control search-input" v-model="signInForm.phone" placeholder="📱 Телефон">
+                                        <input type="text" class="form-control search-input" v-model="signInForm.password" placeholder="🔑 Пароль">
 
                                         <a  class="btn ms-auto d-block mt-3" @click="signIn()">Вход</a>
                                         <a  class="btn ms-auto d-block mt-2 outline-none" @click="page = 'register'">Регистрация</a>
@@ -896,7 +885,7 @@
             </transition>
 
             <transition name="fade">
-                <div  v-if="page == 'profile' && user !== '' ">
+                <div  v-if="page === 'profile' && user !== '' ">
 
 
                     <main class="booking py-5">
@@ -914,7 +903,7 @@
                                                         🙍‍♂️ Имя
                                                     </p>
                                                     <p class="flight-plane tip">
-                                                        Иван
+                                                        {{user.data.first_name}}
                                                     </p>
                                                 </div>
 
@@ -925,7 +914,7 @@
                                                         🙍‍♂️ Фамилия
                                                     </p>
                                                     <p class="flight-plane tip">
-                                                        Иванов
+                                                        {{user.data.last_name}}
                                                     </p>
                                                 </div>
 
@@ -1027,6 +1016,37 @@
                 </div>
             </transition>
 
+            <transition name="fade">
+                <div v-if="page === 'seat'">
+
+
+                    <main class="booking py-5">
+                        <div class="container">
+
+                            <div class="booking-wrapper col-12 col-md-4 mx-auto">
+                                <div class="title text-center">Выбор места </div>
+                                <hr>
+                                <div v-for="(item,index) in seat.rows" class="booking-content pt-4">
+                                    <div class="seats d-flex justify-content-center align-items-center">
+                                        <a @click.prevent=" selectSeat(item +'A')" class="btn m-1">A</a>
+                                        <a @click.prevent="  selectSeat(item +'B')" href="booking_management.html" class="btn m-1">B</a>
+                                        <span class="seats-divider">{{item}}</span>
+                                        <a @click.prevent=" selectSeat(item +'C')" class="btn m-1">C</a>
+                                        <a @click.prevent=" selectSeat(item +'D')" class="btn m-1">D</a>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </main>
+                </div>
+            </transition>
 
 
         </div>

@@ -1,10 +1,11 @@
-let host = 'http://localhost/flightapi/public/api'
+let host = 'http://127.0.0.1:8000/api'
+let web = 'http://127.0.0.1:8000/'
 
 let app = new Vue({
     el: '#app',
     data: {
         page : 'index',
-        user : '',
+        user : {},
         searchForm: {
             from: 'Moscow',
             to: 'Kazan',
@@ -40,6 +41,22 @@ let app = new Vue({
             flights_back:[]
         },
         pops : [],
+        seat: {
+            passengerId: '',
+            flight:'',
+            rows: [1,2,3,4,5,6,7,8,9,10,11,12]
+        },
+        signUpFrom: {
+            first_name: '',
+            last_name: '',
+            phone: '',
+            document_number:'',
+            password:'',
+        },
+        signInForm: {
+            phone: '',
+            password: ''
+        }
 
     },
     methods: {
@@ -126,19 +143,14 @@ let app = new Vue({
                 case 'to' :
                     this.flightsFilter.flights_to.filter(item => {
                         return item.selected
-                    }).length == 0 ? item.selected = !item.selected : ''
+                    }).length === 0 ? item.selected = !item.selected : ''
                     break
                 case 'back' :
                     this.flightsFilter.flights_back.filter(item => {
                         return item.selected
-                    }).length == 0 ? item.selected = !item.selected : ''
+                    }).length === 0 ? item.selected = !item.selected : ''
                     break
             }
-        },
-
-        signIn(){
-            this.page = 'profile'
-            this.user = ''
         },
 
         toBooking(){
@@ -151,7 +163,7 @@ let app = new Vue({
             if (this.flightsSelected.flights_to.length > 0 && this.searchForm.returning !== ''? this.flightsSelected.flights_back.length > 0 : '') {
                 this.page = 'booking'
             } else {
-                this.pop(this.searchForm.returning == ''?'Необходимо выбрать 1 рейс' : 'Необходимо выбрать 2 рейсa')
+                this.pop(this.searchForm.returning === ''?'Необходимо выбрать 1 рейс' : 'Необходимо выбрать 2 рейсa')
             }
 
         },
@@ -177,7 +189,7 @@ let app = new Vue({
                         date: this.flightsSelected.flights_to[0].form.date,
                         id: this.flightsSelected.flights_to[0].flight_id,
                     },
-                    flights_back: {
+                    flight_back: {
                         date: this.flightsSelected.flights_back[0].form.date,
                         id: this.flightsSelected.flights_back[0].flight_id,
                     },
@@ -194,7 +206,6 @@ let app = new Vue({
             let bookingCode = await fetch(host + '/booking', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -207,12 +218,112 @@ let app = new Vue({
             this.booking.code = content.data.code
 
 
-
-             let bookingInfo = await fetch(host + '/booking/'+ this.booking.code);
+            let bookingInfo = await fetch(host + '/booking/'+ this.booking.code);
             content = await bookingInfo.json();
-            this.bookingInfo = content
+            this.bookingInfo = content.data
             this.page = 'booking_management'
         },
-    }
+
+        toSeat(passengerId,flight) {
+            this.seat.passengerId = passengerId
+            this.seat.flight = flight
+            this.page = 'seat'
+        },
+
+        selectSeat(seat){
+             fetch(host + `/booking/`+ this.bookingInfo.code +`/seat`,{
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    passenger : this.seat.passengerId,
+                    seat : seat,
+                    type : this.seat.flight
+                })
+            })
+                .then(res =>{
+                    if (res.status === 422) {
+                        this.pop('Место '+ seat + ' уже занято')
+                    } else {
+                        fetch(host + '/booking/'+ this.booking.code)
+                            .then(res => res.json())
+                            .then(json => this.bookingInfo = json.data)
+                        this.page = 'booking_management'
+
+                    }
+
+
+                } )
+
+        },
+
+        signIn(){
+            fetch(host + '/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.signInForm)
+            })
+                .then(res =>{
+                    if (res.status === 200){
+                        this.pop('Вы успешно вошли')
+                    } else {
+                        this.pop('Проверьте введеные данные')
+                    }
+                    return res.json()
+                })
+                .then(json => {
+                    this.user.token = json.data.token
+                    fetch(web +'/user',{
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + this.user.token
+                        }
+                    })
+                        .then(res =>{
+                            if (res.status === 200){
+                            } else {
+                                this.pop('Что-то пошло не так')
+                            }
+                            return res.text()
+                        })
+                        .then(text => {
+                            let json = JSON.parse(text)
+                            console.log(json)
+                            this.user.data = json
+                            this.page = 'profile'
+                        })
+                })
+
+
+        },
+
+        signUp(){
+            fetch(host + '/register',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.signUpFrom)
+            })
+                .then(res =>{
+                    if (res.status === 204){
+                        this.pop('Вы успешно зарегестрировались')
+                        this.page = 'login'
+                    } else {
+                        this.pop('Что-то пошло не так')
+
+                    }
+                })
+        },
+
+
+
+
+
+    },
+
 
 })
